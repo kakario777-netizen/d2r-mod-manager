@@ -23,9 +23,9 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/ladislav-zezula/StormLib
           git clone --depth 1 https://github.com/ladislav-zezula/CascLib
-          cmake -S StormLib -B sb -A x64 -DBUILD_SHARED_LIBS=ON -DSTORM_UNICODE=ON -DSTORM_USE_BUNDLED_LIBRARIES=ON -DWITH_BUNDLED_LIBTOMMATH=ON -DWITH_BUNDLED_LIBTOMCRYPT=ON -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+          cmake -S StormLib -B sb -A x64 -DBUILD_SHARED_LIBS=ON -DSTORM_UNICODE=ON -DSTORM_USE_BUNDLED_LIBRARIES=ON -DWITH_BUNDLED_LIBTOMMATH=ON -DWITH_BUNDLED_LIBTOMCRYPT=ON "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
           cmake --build sb --config Release
-          cmake -S CascLib -B cb -A x64 -DCASC_BUILD_SHARED_LIB=ON -DCASC_UNICODE=ON -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+          cmake -S CascLib -B cb -A x64 -DCASC_BUILD_SHARED_LIB=ON -DCASC_UNICODE=ON "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
           cmake --build cb --config Release
           New-Item -ItemType Directory -Force app/lib | Out-Null
           $s = Get-ChildItem sb -Recurse -Filter *.dll | Where-Object { $_.Name -match 'storm' } | Select-Object -First 1
